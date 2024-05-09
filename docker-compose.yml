@@ -63,6 +63,10 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    entrypoint:
+      - /usr/share/grafana/bin/grafana-server
+      - --homepath=/usr/share/grafana
+      - --config=/etc/grafana-config/grafana.ini
     ports:
       - 3000:3000
     restart: unless-stopped
@@ -70,7 +74,13 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
-       - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-       - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/config:/etc/grafana-config
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards-provisioning:/etc/grafana/provisioning/dashboards
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
     networks:
       - pennix
+    depends_on:
+      - prometheus
+      - mysqld_exporter
+      - node-exporter
