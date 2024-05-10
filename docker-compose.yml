@@ -66,11 +66,17 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
+    entrypoint:
+      - /usr/share/grafana/bin/grafana-server
+      - --homepath=/usr/share/grafana
+      - --config=/etc/grafana-config/grafana.ini
     environment:
+      - GF_DEFAULT_LOCALE=zh-CN
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana
       - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/17320.json
     volumes:
+      - ./grafana/config:/etc/grafana-config
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/var/lib/grafana/dashboards
     networks:
