@@ -10,3 +10,17 @@ datasources:
   isDefault: true
   access: proxy
   editable: true
+- name: mysql
+  type: MySQL
+  url: http://10.102.11.140:3306
+  user: root
+  isDefault: false
+  jsonData:
+    connMaxLifetime: 14400
+    database: riscv64_benchmark
+    maxIdleConns: 100
+    maxIdleConnsAuto: true
+    maxOpenConns: 100
+  readOnly: false
+  access: proxy
+  editable: true

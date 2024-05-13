@@ -33,7 +33,8 @@ services:
       - MYSQL_USER=exporter
       - MYSQL_PASSWORD=Prometheus
     volumes:
-      - ./mysql:/docker-entrypoint-initdb.d
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
     networks:
       - pennix
 
