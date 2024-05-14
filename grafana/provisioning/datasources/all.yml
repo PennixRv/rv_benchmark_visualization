@@ -17,7 +17,7 @@ datasources:
   isDefault: false
   jsonData:
     connMaxLifetime: 14400
-    database: riscv64_benchmark
+    database: riscv64_benchmark_db
     maxIdleConns: 100
     maxIdleConnsAuto: true
     maxOpenConns: 100
